@@ -43,20 +43,20 @@ Widget displayLoc(LocationData locData){
           mainAxisAlignment: MainAxisAlignment.center,
           children: [Row(
             children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('(${locData.latitude},'),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(' ${locData.longitude})'),
-              ),
-            )
+            dispLocData('(${locData.latitude},'),
+            dispLocData(' ${locData.longitude})')
           ]),
         ]),
     );
   }
+}
+
+
+Widget dispLocData(String data){
+  return Expanded(
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(data)
+    ),
+  );
 }
