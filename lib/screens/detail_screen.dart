@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
 class DetailScreen extends StatefulWidget {
+  static const routeName = 'detailScreen';
+  
   @override
   _DetailScreenState createState() => _DetailScreenState();
 }
 
 class _DetailScreenState extends State<DetailScreen> {
   LocationData locationData; 
+  
 
   @override
   void initState(){
