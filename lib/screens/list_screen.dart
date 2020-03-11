@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as Path;
+
 
 class ListScreen extends StatefulWidget {
   @override
@@ -8,23 +12,24 @@ class ListScreen extends StatefulWidget {
 class _ListScreenState extends State<ListScreen> {
   @override
   Widget build(BuildContext context) {
-    return listScaffold();
+    return listScaffold(context);
   }
 }
 
 
-Widget listScaffold(){
+Widget listScaffold(BuildContext context){
   return Scaffold( 
     appBar: AppBar(
-      actions: [addItems()],
       title: titleRow()),
-    body: Placeholder(),
+    body: whichScreen(context),
     floatingActionButton: FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () {}
-    )
+    ),
+    floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
   );
 }
+
 
 
 Widget titleRow(){
@@ -42,4 +47,29 @@ Widget addItems(){
     padding: const EdgeInsets.all(8.0),
     child: Text('#'),
   );
+}
+
+
+Widget whichScreen(BuildContext context){
+  return StreamBuilder(
+    stream: Firestore.instance.collection('wasteagram_details').snapshots(),
+    builder: (content, snapshot){
+      if(snapshot.hasData){
+        return ListView.builder(
+          itemCount: snapshot.data.documents.length,
+          itemBuilder: (context, index){
+            var post = snapshot.data.documents[index];
+            return ListTile( 
+              title: Center(
+                child: Text(post['date'].toString())), 
+              trailing: Text(post['quantity'].toString())
+            );
+          }
+        );
+      } else {
+        return Center(child: CircularProgressIndicator());
+      }
+    }
+    );
+
 }
