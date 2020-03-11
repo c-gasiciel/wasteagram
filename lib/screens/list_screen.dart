@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as Path;
 
 
@@ -21,7 +20,7 @@ Widget listScaffold(BuildContext context){
   return Scaffold( 
     appBar: AppBar(
       title: titleRow()),
-    body: whichScreen(context),
+    body: generateScreen(context),
     floatingActionButton: FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () {}
@@ -50,7 +49,7 @@ Widget addItems(){
 }
 
 
-Widget whichScreen(BuildContext context){
+Widget generateScreen(BuildContext context){
   return StreamBuilder(
     stream: Firestore.instance.collection('wasteagram_details').snapshots(),
     builder: (content, snapshot){
