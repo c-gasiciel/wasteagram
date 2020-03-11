@@ -7,10 +7,16 @@ class NewPostScreen extends StatefulWidget {
 }
 
 class _NewPostScreenState extends State<NewPostScreen> {
-  
+  final title = 'Wasteagram'; 
+
   @override
   Widget build(BuildContext context) {
-    return Placeholder(
+    return Scaffold(
+      appBar: AppBar(
+        title: Center( 
+          child: Text(title)
+        )),
+      body: Placeholder()
     );
   }
 }
