@@ -19,6 +19,10 @@ Widget listScaffold(){
       actions: [addItems()],
       title: titleRow()),
     body: Placeholder(),
+    floatingActionButton: FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: () {}
+    )
   );
 }
 
