@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path/path.dart' as Path;
+import 'new_post_screen.dart';
 
 
 class ListScreen extends StatefulWidget {
   static const routeName = '/';
-  
+
   @override
   _ListScreenState createState() => _ListScreenState();
 }
@@ -26,7 +27,7 @@ Widget listScaffold(BuildContext context){
     body: generateScreen(context),
     floatingActionButton: FloatingActionButton(
       child: Icon(Icons.add),
-      onPressed: () {}
+      onPressed: () { pushNewPost(context); }
     ),
     floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
   );
@@ -74,4 +75,9 @@ Widget generateScreen(BuildContext context){
     }
     );
 
+}
+
+
+void pushNewPost(BuildContext context){
+  Navigator.of(context).pushNamed(NewPostScreen.routeName);
 }

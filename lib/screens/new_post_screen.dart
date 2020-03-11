@@ -10,8 +10,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
   
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Placeholder(
     );
   }
 }
