@@ -39,17 +39,34 @@ Widget titleRow(){
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-    Text('Wasteagram'),
+    Text('Wasteagram - '),
     addItems()
   ]);
 }
 
 
 Widget addItems(){
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Text('#'),
-  );
+  return StreamBuilder(
+    stream: Firestore.instance.collection('wasteagram_details').snapshots(),
+    builder: (content, snapshot){
+      if(snapshot.hasData){
+        var total = 0;
+        var post = snapshot.data.documents;
+        for (var idx = 0; idx < post.length; idx++){
+            total += post[idx]['quantity'];
+        }
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(child: Text('$total')),
+        );
+      } else {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(child: Text('0')),
+        );
+      }
+    }
+    );
 }
 
 
@@ -73,8 +90,7 @@ Widget generateScreen(BuildContext context){
         return Center(child: CircularProgressIndicator());
       }
     }
-    );
-
+  );
 }
 
 
