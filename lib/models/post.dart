@@ -6,18 +6,19 @@ import 'package:location/location.dart';
 
 //Represents a post in Wasteagram
 class Post{
-  DateTime date;
+  //DateTime date;
+  String date;
   String imageURL;
   int quantity;
-  LocationData latitude; 
-  LocationData longitude;
+  String latitude; 
+  String longitude;
 
   Post({this.date, this.imageURL, this.quantity, this.latitude, this.longitude});
 
-  String dateToString(){
-     var formatter = new DateFormat('EEEE MMMMd, y');
-    return formatter.format(date);
-  }
+  //String dateToString(){
+  //   var formatter = new DateFormat('EEEE MMMMd, y');
+  //  return formatter.format(date);
+  //}
 
   //  : super (key: key);
 

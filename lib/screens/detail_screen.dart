@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/post.dart';
 
 
 class DetailScreen extends StatelessWidget {
@@ -7,28 +9,29 @@ class DetailScreen extends StatelessWidget {
 
   @override 
   Widget build(BuildContext context){
+    final Post args = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(title)),
-        body: displayDetails(context)
+        title: Center(child: Text(title))),
+        body: displayDetails(context, args)
     );
   }
 }
 
 
-Widget displayDetails(BuildContext context){
+Widget displayDetails(BuildContext context, Post args){
   return Center(
     child: Column(children: [
-      Text('Date Posted'),
-      displayImg(context),
-      Text('Items: ##'),
-      Text('(latitude, longitude)')
+      Text(args.date),
+        displayImg(context, args.imageURL),
+        Text('Items: ${args.quantity}'),
+        Text('(${args.latitude}, ${args.longitude})')
     ],
-    ));
+  ));
 }
 
-
-Widget displayImg(BuildContext context){
+Widget displayImg(BuildContext context, String path){
   return Container(
     child: Padding(
       padding: EdgeInsets.fromLTRB(
@@ -37,8 +40,9 @@ Widget displayImg(BuildContext context){
         padding(context, 0.1),
         padding(context, 0.1)
         ),
-      child: Placeholder())
-      );
+      child: Image.network(path)
+      )
+  );
 }
 
 double padding(BuildContext context, double num){
