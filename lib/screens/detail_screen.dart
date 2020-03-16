@@ -23,7 +23,7 @@ class DetailScreen extends StatelessWidget {
 Widget displayDetails(BuildContext context, Post args){
   return Center(
     child: Column(children: [
-      Text(args.date),
+      Text(args.dateToString()),
         displayImg(context, args.imageURL),
         Text('Items: ${args.quantity}'),
         Text('(${args.latitude}, ${args.longitude})')

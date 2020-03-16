@@ -83,7 +83,7 @@ Widget generateScreen(BuildContext context, String database){
           itemBuilder: (context, index){
             var post = snapshot.data.documents[index];
             Post args = Post(
-              date: post['date'], 
+              date: DateTime.parse(post['date'].toDate().toString()), 
               imageURL: post['image_url'], 
               quantity: post['quantity'], 
               latitude: post['latitude'], 
@@ -91,7 +91,7 @@ Widget generateScreen(BuildContext context, String database){
 
             return GestureDetector(
               onTap: () { pushDetailScreen(context, args); },
-              child: makeListTile(post['date'].toString(), post['quantity'].toString())
+              child: makeListTile(args.dateToString(), post['quantity'].toString())
             );
           }
         );
