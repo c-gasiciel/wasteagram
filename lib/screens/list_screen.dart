@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path/path.dart' as Path;
 import 'new_post_screen.dart';
+import 'detail_screen.dart';
 
 
 class ListScreen extends StatefulWidget {
@@ -79,10 +80,9 @@ Widget generateScreen(BuildContext context){
           itemCount: snapshot.data.documents.length,
           itemBuilder: (context, index){
             var post = snapshot.data.documents[index];
-            return ListTile( 
-              title: Center(
-                child: Text(post['date'].toString())), 
-              trailing: Text(post['quantity'].toString())
+            return GestureDetector(
+              onTap: () { pushDetailScreen(context); },
+              child: makeListTile(post['date'].toString(), post['quantity'].toString())
             );
           }
         );
@@ -94,6 +94,20 @@ Widget generateScreen(BuildContext context){
 }
 
 
+Widget makeListTile(String title, String quantity){
+  return ListTile( 
+    title: Center(
+      child: Text(title)), 
+    trailing: Text(quantity)
+  );
+}
+
+
 void pushNewPost(BuildContext context){
   Navigator.of(context).pushNamed(NewPostScreen.routeName);
+}
+
+
+void pushDetailScreen(BuildContext context){
+  Navigator.of(context).pushNamed(DetailScreen.routeName);
 }
