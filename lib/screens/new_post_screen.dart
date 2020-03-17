@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'components/post_form.dart';
 
 class NewPostScreen extends StatefulWidget {
   static const routeName = 'newPost';
@@ -16,7 +17,11 @@ class _NewPostScreenState extends State<NewPostScreen> {
         title: Center( 
           child: Text(title)
         )),
-      body: Placeholder()
+      body: PostForm()
     );
   }
+}
+
+double padding(BuildContext context, double num){
+  return MediaQuery.of(context).size.width * num;
 }
