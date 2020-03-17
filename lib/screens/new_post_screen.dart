@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'components/post_form.dart';
+import 'choose_image_screen.dart';
+import 'list_screen.dart';
 
 class NewPostScreen extends StatefulWidget {
   static const routeName = 'newPost';
@@ -14,6 +16,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pushNamed(ListScreen.routeName)),
         title: Center( 
           child: Text(title)
         )),
@@ -22,6 +27,3 @@ class _NewPostScreenState extends State<NewPostScreen> {
   }
 }
 
-double padding(BuildContext context, double num){
-  return MediaQuery.of(context).size.width * num;
-}

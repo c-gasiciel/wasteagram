@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:path/path.dart' as Path;
-import 'new_post_screen.dart';
+import 'choose_image_screen.dart';
 import 'detail_screen.dart';
 import '../models/post.dart';
 
@@ -113,7 +113,7 @@ Widget makeListTile(String title, String quantity){
 
 
 void pushNewPost(BuildContext context, String database){
-  Navigator.of(context).pushNamed(NewPostScreen.routeName, arguments: database);
+  Navigator.of(context).pushNamed(ChooseImageScreen.routeName, arguments: database);
 }
 
 
