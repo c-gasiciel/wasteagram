@@ -3,6 +3,7 @@ import 'components/post_form.dart';
 import 'choose_image_screen.dart';
 import 'list_screen.dart';
 
+
 class NewPostScreen extends StatefulWidget {
   static const routeName = 'newPost';
   @override

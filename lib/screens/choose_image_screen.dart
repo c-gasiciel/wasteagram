@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'components/post_form.dart';
@@ -21,6 +22,7 @@ class _ChooseImageScreenState extends State<ChooseImageScreen> {
 
   void getImage() async{
     image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
     setState( () {}) ;
   }
 

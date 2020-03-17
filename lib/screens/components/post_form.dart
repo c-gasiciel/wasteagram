@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:location/location.dart';
+import 'package:path/path.dart' as Path;
 import '../../models/post.dart';
 
 class PostForm extends StatefulWidget {
@@ -16,6 +18,7 @@ class _PostFormState extends State<PostForm> {
   final _formKey = GlobalKey<FormState>();
   final postFields = Post();
   LocationData locationData;
+
   
   @override
   void initState(){
@@ -27,6 +30,18 @@ class _PostFormState extends State<PostForm> {
     var locationService = Location();
     locationData = await locationService.getLocation();
   }
+
+  Future<String> saveImage(File image) async{
+    StorageReference storageReference = FirebaseStorage.instance.ref().child(Path.basename(image.path));
+    StorageUploadTask uploadTask = storageReference.putFile(image);
+    await uploadTask.onComplete;
+    String url = await storageReference.getDownloadURL();
+    return url;
+  }
+
+
+
+
 
   Widget build(BuildContext context) {
     final database = ModalRoute.of(context).settings.arguments;
@@ -43,9 +58,11 @@ class _PostFormState extends State<PostForm> {
               onPressed: () async{
                 if(_formKey.currentState.validate()){
                   _formKey.currentState.save();
+                  String url = await saveImage(widget.image);
+                  
                   Firestore.instance.collection(database).add({
                       'date': DateTime.now(),
-                      'image_url': 'https://vetmed.illinois.edu/wp-content/uploads/2017/12/pc-keller-hedgehog.jpg',
+                      'image_url': url,
                       'latitude': '${locationData.latitude}',
                       'longitude': '${locationData.longitude}',
                       'quantity': postFields.quantity
