@@ -30,7 +30,7 @@ Widget listScaffold(BuildContext context){
     body: generateScreen(context, database),
     floatingActionButton: FloatingActionButton(
       child: Icon(Icons.add),
-      onPressed: () { pushNewPost(context); }
+      onPressed: () { pushNewPost(context, database); }
     ),
     floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
   );
@@ -112,8 +112,8 @@ Widget makeListTile(String title, String quantity){
 }
 
 
-void pushNewPost(BuildContext context){
-  Navigator.of(context).pushNamed(NewPostScreen.routeName);
+void pushNewPost(BuildContext context, String database){
+  Navigator.of(context).pushNamed(NewPostScreen.routeName, arguments: database);
 }
 
 

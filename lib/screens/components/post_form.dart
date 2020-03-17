@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:location/location.dart';
 import '../../models/post.dart';
 
@@ -25,6 +26,8 @@ class _PostFormState extends State<PostForm> {
   }
 
   Widget build(BuildContext context) {
+    final database = ModalRoute.of(context).settings.arguments;
+    
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -37,9 +40,13 @@ class _PostFormState extends State<PostForm> {
               onPressed: () async{
                 if(_formKey.currentState.validate()){
                   _formKey.currentState.save();
-                  postFields.date = DateTime.now();
-                  postFields.latitude = '$locationData.latitude';
-                  postFields.longitude = '$locationData.longitude';
+                  Firestore.instance.collection(database).add({
+                      'date': DateTime.now(),
+                      'image_url': 'https://vetmed.illinois.edu/wp-content/uploads/2017/12/pc-keller-hedgehog.jpg',
+                      'latitude': '${locationData.latitude}',
+                      'longitude': '${locationData.longitude}',
+                      'quantity': postFields.quantity
+                  });
                   //Return to previous page after saving
                   Navigator.of(context).pop();
                 }
