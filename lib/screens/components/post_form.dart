@@ -1,9 +1,13 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:location/location.dart';
 import '../../models/post.dart';
 
 class PostForm extends StatefulWidget {
+  File image; 
+  PostForm({Key key, this.image}) : super (key: key);
+
   @override
   _PostFormState createState() => _PostFormState();
 }
@@ -12,7 +16,6 @@ class _PostFormState extends State<PostForm> {
   final _formKey = GlobalKey<FormState>();
   final postFields = Post();
   LocationData locationData;
-
   
   @override
   void initState(){
@@ -33,7 +36,7 @@ class _PostFormState extends State<PostForm> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            selectedPhoto(context),
+            selectedPhoto(context, widget.image),
             formField(context, postFields, 'Number of Items'),
             //SizedBox(height: 10),
             RaisedButton(
@@ -61,7 +64,7 @@ class _PostFormState extends State<PostForm> {
   }
 }
 
-Widget selectedPhoto(BuildContext context){
+Widget selectedPhoto(BuildContext context, File image){
   return Container(
     child: Padding(
       padding: EdgeInsets.fromLTRB(
@@ -70,7 +73,7 @@ Widget selectedPhoto(BuildContext context){
         padding(context, 0.1),
         padding(context, 0.05)
         ),
-      child: Placeholder()
+      child: Image.file(image)
       )
   );
 }

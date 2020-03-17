@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'components/post_form.dart';
+//import '../models/post.dart';
 
 class ChooseImageScreen extends StatefulWidget {
   static const routeName = 'addNewImage';
@@ -56,20 +58,7 @@ class _ChooseImageScreenState extends State<ChooseImageScreen> {
       ));
   }
   else{
-    return Center( 
-      child: Column( 
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.file(image),
-          SizedBox(height: 40),
-          RaisedButton( 
-            child: Text('Use This Photo'),
-            onPressed: () {
-
-            },
-          )]
-      )
-    );
+    return PostForm(image: image);
   }
 }
 }
