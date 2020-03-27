@@ -23,22 +23,12 @@ class DetailScreen extends StatelessWidget {
 Widget displayDetails(BuildContext context, Post args){
   return Center(
     child: Column(children: [
-      Expanded(
-          flex: 2,
-          child: Text(args.dateToString(),
-            style: TextStyle(fontSize: 20))
-          ),
+      makeTextElement(2, args.dateToString(), 20),
       Expanded(
           flex: 6,
           child: displayImg(context, args.imageURL)),
-      Expanded(
-          flex: 1,
-          child: Text('Items: ${args.quantity}',
-            style: TextStyle(fontSize: 16))),
-      Expanded(
-          flex: 1,
-          child: Text('(${args.latitude}, ${args.longitude})',
-            style: TextStyle(fontSize: 16))),
+      makeTextElement(1, 'Items: ${args.quantity}', 16),
+      makeTextElement(1, '(${args.latitude}, ${args.longitude})', 16)
     ]
   ));
 }
@@ -51,6 +41,15 @@ Widget displayImg(BuildContext context, String path){
 
 double padding(BuildContext context, double num){
   return MediaQuery.of(context).size.width * num;
+}
+
+
+Widget makeTextElement(int flexFactor, String text, double fontSize){
+  return Expanded(
+    flex: flexFactor,
+    child: Text(text,
+        style: TextStyle(fontSize: fontSize))
+  );
 }
 
 
