@@ -50,7 +50,7 @@ Widget titleRow(String database){
 
 Widget addItems(String database){
   return StreamBuilder(
-    stream: Firestore.instance.collection(database).snapshots(),
+    stream: Firestore.instance.collection(database).orderBy('date', descending: true).snapshots(),
     builder: (content, snapshot){
       if(snapshot.hasData){
         var total = 0;

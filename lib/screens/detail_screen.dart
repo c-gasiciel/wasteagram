@@ -23,26 +23,30 @@ class DetailScreen extends StatelessWidget {
 Widget displayDetails(BuildContext context, Post args){
   return Center(
     child: Column(children: [
-      Text(args.dateToString()),
-        displayImg(context, args.imageURL),
-        Text('Items: ${args.quantity}'),
-        Text('(${args.latitude}, ${args.longitude})')
-    ],
+      Expanded(
+          flex: 2,
+          child: Text(args.dateToString(),
+            style: TextStyle(fontSize: 20))
+          ),
+      Expanded(
+          flex: 6,
+          child: displayImg(context, args.imageURL)),
+      Expanded(
+          flex: 1,
+          child: Text('Items: ${args.quantity}',
+            style: TextStyle(fontSize: 16))),
+      Expanded(
+          flex: 1,
+          child: Text('(${args.latitude}, ${args.longitude})',
+            style: TextStyle(fontSize: 16))),
+    ]
   ));
 }
 
 Widget displayImg(BuildContext context, String path){
   return Container(
-    child: Padding(
-      padding: EdgeInsets.fromLTRB(
-        padding(context, 0.1),
-        padding(context, 0.1),
-        padding(context, 0.1),
-        padding(context, 0.1)
-        ),
       child: Image.network(path)
-      )
-  );
+      );
 }
 
 double padding(BuildContext context, double num){
